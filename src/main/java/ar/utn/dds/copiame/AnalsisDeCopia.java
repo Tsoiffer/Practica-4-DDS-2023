@@ -7,13 +7,23 @@ import java.util.stream.Collectors;
 
 import org.paukov.combinatorics3.Generator;
 
+import javax.persistence.*;
+
 public class AnalsisDeCopia {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long pk;
 	private String id;
 	private float umbral;
+	@Transient
 	private Lote lote;
+	@OneToMany
+	@JoinColumn(name = "analisis_id")
 	private List<ParDocumentos> pares;
+	@OneToMany
+	@JoinColumn(name = "analisis_id")
 	private List<EvaluadorDeCopia> evaluadores;
+	@OneToOne
 	private ResultadoLote rl;
 		
 	public AnalsisDeCopia(float umbral, Lote lote) {
